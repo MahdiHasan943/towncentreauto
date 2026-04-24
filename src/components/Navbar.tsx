@@ -3,6 +3,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+interface NavItem {
+  label: string;
+  href: string;
+  subLinks?: NavItem[];
+}
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
@@ -19,7 +25,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  const navLinks: NavItem[] = [
     { 
       label: "About Us", 
       href: "#about",
@@ -107,6 +113,7 @@ export default function Navbar() {
     { label: "Specials", href: "#specials" },
     { label: "Careers", href: "#careers" },
   ];
+
 
   return (
     <header className="w-full z-[100] bg-[#1a1a1a] sticky top-0 overflow-x-clip">
